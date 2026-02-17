@@ -281,7 +281,7 @@
                         </div>
                         <div>
                             <div class="text-gray-900 dark:text-white font-medium">Skala Global</div>
-                            <div class="text-gray-500 text-sm mt-1">Jaringan mitra di lebih dari 5 negara</div>
+                            <div class="text-gray-500 text-sm mt-1">Telah menjangkau project dan prestasi lebih dari 5 negara</div>
                         </div>
                     </div>
                 </div>
