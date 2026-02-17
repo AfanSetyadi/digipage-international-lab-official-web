@@ -460,6 +460,11 @@
         <!-- Gallery -->
         <?php
             $galleryImages = [
+                ["src" => "assets/images/gallery/Activity-1.jpg", "alt" => "Dokumentasi Aktivitas Internasional 1"],
+                ["src" => "assets/images/gallery/Activity-3.jpg", "alt" => "Dokumentasi Aktivitas Internasional 3"],
+                ["src" => "assets/images/gallery/Activity-2.jpg", "alt" => "Dokumentasi Aktivitas Internasional 2"],
+                ["src" => "assets/images/gallery/Activity-5.jpg", "alt" => "Dokumentasi Aktivitas Internasional 5"],
+                ["src" => "assets/images/gallery/Activity-4.jpg", "alt" => "Dokumentasi Aktivitas Internasional 4"],
                 ["src" => "assets/images/gallery/IMG_8977.JPG", "alt" => "Dokumentasi Prestasi Internasional 1"],
                 ["src" => "assets/images/gallery/IMG_8966.JPG", "alt" => "Dokumentasi Prestasi Internasional 2"],
                 ["src" => "assets/images/gallery/IMG_7804.JPG", "alt" => "Dokumentasi Prestasi Internasional 3"],
@@ -470,7 +475,7 @@
             ];
         ?>
         <div class="mt-16">
-            <div class="grid grid-cols-7 gap-2 sm:gap-3">
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3">
                 <?php foreach ($galleryImages as $idx => $img): ?>
                     <button
                         type="button"
