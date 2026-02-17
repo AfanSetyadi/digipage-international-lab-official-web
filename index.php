@@ -105,9 +105,9 @@
     ];
 
     $stats = [
-        ["value" => "50+", "label" => "Projek Riset"],
-        ["value" => "30+", "label" => "Mitra Bisnis"],
-        ["value" => "10+", "label" => "Negara Terjangkau"],
+        ["value" => "25+", "label" => "Projek Riset"],
+        ["value" => "30+", "label" => "Klien & Mitra Bisnis"],
+        ["value" => "5+", "label" => "Negara Terjangkau"],
         ["value" => "99%", "label" => "Kepuasan Klien"],
     ];
 
