@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { COMPANY_NAME } from "@/lib/constants";
 
 const NAV_LINKS = [
@@ -73,7 +74,12 @@ export function Navbar() {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 dark:bg-[#0a0f1e]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5">
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 dark:bg-[#0a0f1e]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#hero" className="flex items-center gap-3 group">
@@ -147,6 +153,6 @@ export function Navbar() {
           </div>
         </div>
       )}
-    </nav>
+    </motion.nav>
   );
 }

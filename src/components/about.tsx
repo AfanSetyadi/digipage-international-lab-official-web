@@ -1,4 +1,10 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { COMPANY_NAME, LEGAL_NAME } from "@/lib/constants";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const VIEWPORT = { once: true, margin: "-80px" } as const;
 
 function CheckIcon() {
   return (
@@ -37,7 +43,12 @@ export function About() {
     <section id="tentang" className="relative py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.7, ease: EASE }}
+          >
             <span className="text-brand-600 dark:text-brand-400 text-sm font-semibold tracking-widest uppercase">
               Tentang Kami
             </span>
@@ -46,7 +57,7 @@ export function About() {
             </h2>
             <p className="mt-6 text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
               <strong className="text-gray-900 dark:text-gray-200">{COMPANY_NAME}</strong>{" "}
-              ({LEGAL_NAME}) merupakan startup inovatif yang berfokus pada riset
+              ({LEGAL_NAME}) merupakan startup inovatif yang sejak tahun 2017 berfokus pada riset
               dan pengembangan bisnis mutakhir di berbagai sektor, dengan
               keunggulan utama pada penguasaan teknologi software, data, dan
               kecerdasan buatan (AI).
@@ -70,9 +81,15 @@ export function About() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative">
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
+          >
             <div className="aspect-square rounded-3xl bg-gradient-to-br from-brand-100 via-brand-50 to-transparent dark:from-brand-600/20 dark:via-brand-800/10 dark:to-transparent border border-gray-200 dark:border-white/5 glow flex items-center justify-center">
               <div className="text-center p-8">
                 <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-brand-100 dark:bg-brand-600/20 border border-brand-200 dark:border-brand-500/20 mb-6">
@@ -88,7 +105,7 @@ export function About() {
             </div>
             <div className="absolute -top-4 -right-4 w-24 h-24 bg-[radial-gradient(circle,_rgba(51,120,255,0.15)_1px,_transparent_1px)] bg-[size:8px_8px]" />
             <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-[radial-gradient(circle,_rgba(51,120,255,0.15)_1px,_transparent_1px)] bg-[size:8px_8px]" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

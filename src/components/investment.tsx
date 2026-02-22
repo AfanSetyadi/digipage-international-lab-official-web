@@ -1,3 +1,15 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const VIEWPORT = { once: true, margin: "-80px" } as const;
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
+
 const BENEFITS = [
   {
     title: "Akselerasi",
@@ -40,13 +52,23 @@ export function Investment() {
       <div className="absolute inset-0 bg-gradient-to-r from-brand-50 dark:from-brand-600/5 to-transparent" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
+          <motion.div
+            className="order-2 lg:order-1"
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } },
+            }}
+          >
             <div className="grid grid-cols-2 gap-4">
               {BENEFITS.map((b) => {
                 const colors = COLOR_MAP[b.color];
                 return (
-                  <div
+                  <motion.div
                     key={b.title}
+                    variants={cardVariants}
                     className={`p-6 rounded-2xl bg-white dark:bg-white/[0.03] border border-gray-100 dark:border-white/5 space-y-3 shadow-sm dark:shadow-none ${"offset" in b && b.offset ? "mt-8" : ""}`}
                   >
                     <div className={`w-10 h-10 rounded-lg ${colors.bg} flex items-center justify-center`}>
@@ -56,13 +78,19 @@ export function Investment() {
                     </div>
                     <div className="text-gray-900 dark:text-white font-semibold">{b.title}</div>
                     <p className="text-gray-500 text-sm">{b.desc}</p>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="order-1 lg:order-2">
+          <motion.div
+            className="order-1 lg:order-2"
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.7, ease: EASE }}
+          >
             <span className="text-brand-600 dark:text-brand-400 text-sm font-semibold tracking-widest uppercase">
               Investasi & Kemitraan
             </span>
@@ -89,7 +117,7 @@ export function Investment() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

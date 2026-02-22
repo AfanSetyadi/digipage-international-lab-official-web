@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   COMPANY_NAME,
   LEGAL_NAME,
@@ -6,6 +9,9 @@ import {
   LINKEDIN_URL,
   DEALLS_URL,
 } from "@/lib/constants";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const VIEWPORT = { once: true, margin: "-40px" } as const;
 
 function EmailIcon() {
   return (
@@ -91,7 +97,13 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#080c1a]">
+    <motion.footer
+      className="border-t border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-[#080c1a]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={VIEWPORT}
+      transition={{ duration: 0.8, ease: EASE }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid md:grid-cols-3 gap-12">
           <div>
@@ -215,6 +227,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

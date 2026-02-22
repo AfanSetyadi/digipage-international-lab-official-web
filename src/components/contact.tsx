@@ -1,4 +1,10 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { EMAIL, WHATSAPP_URL } from "@/lib/constants";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const VIEWPORT = { once: true, margin: "-80px" } as const;
 
 function EmailIcon() {
   return (
@@ -20,18 +26,42 @@ export function Contact() {
   return (
     <section id="kontak" className="relative py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-gradient-to-br from-brand-100 via-brand-50 to-transparent dark:from-brand-600/20 dark:via-brand-800/10 dark:to-transparent border border-gray-200 dark:border-white/5 overflow-hidden">
+        <motion.div
+          className="relative rounded-3xl bg-gradient-to-br from-brand-100 via-brand-50 to-transparent dark:from-brand-600/20 dark:via-brand-800/10 dark:to-transparent border border-gray-200 dark:border-white/5 overflow-hidden"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={VIEWPORT}
+          transition={{ duration: 0.7, ease: EASE }}
+        >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(51,120,255,0.06),_transparent_70%)] dark:bg-[radial-gradient(circle_at_30%_50%,_rgba(51,120,255,0.1),_transparent_70%)]" />
           <div className="relative px-8 py-16 sm:px-16 sm:py-24 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
+            <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
+            >
               Siap Bertransformasi?
-            </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p
+              className="mt-4 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
+            >
               Hubungi kami untuk berdiskusi tentang bagaimana Digipage
               International Lab dapat membantu mewujudkan visi digital bisnis
               Anda.
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            </motion.p>
+            <motion.div
+              className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT}
+              transition={{ duration: 0.6, ease: EASE, delay: 0.4 }}
+            >
               <a
                 href={`mailto:${EMAIL}`}
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-brand-600/25"
@@ -48,9 +78,9 @@ export function Contact() {
                 <WhatsAppIcon />
                 WhatsApp
               </a>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

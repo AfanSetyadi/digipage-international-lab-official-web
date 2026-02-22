@@ -1,5 +1,16 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ACHIEVEMENTS, TIER_BADGE_CLASSES } from "@/lib/constants";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const VIEWPORT = { once: true, margin: "-80px" } as const;
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
 
 function LocationIcon() {
   return (
@@ -12,7 +23,13 @@ function LocationIcon() {
 
 export function Achievements() {
   return (
-    <div className="text-center max-w-2xl mx-auto mb-16">
+    <motion.div
+      className="text-center max-w-2xl mx-auto mb-16"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT}
+      transition={{ duration: 0.6, ease: EASE }}
+    >
       <span className="text-brand-600 dark:text-brand-400 text-sm font-semibold tracking-widest uppercase">
         Prestasi Founder
       </span>
@@ -23,16 +40,26 @@ export function Achievements() {
         Deretan pencapaian yang membuktikan komitmen kami terhadap inovasi dan
         keunggulan di kancah nasional maupun internasional.
       </p>
-    </div>
+    </motion.div>
   );
 }
 
 export function AchievementList() {
   return (
-    <div className="grid md:grid-cols-2 gap-5">
+    <motion.div
+      className="grid md:grid-cols-2 gap-5"
+      initial="hidden"
+      whileInView="visible"
+      viewport={VIEWPORT}
+      variants={{
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.08 } },
+      }}
+    >
       {ACHIEVEMENTS.map((a) => (
-        <div
+        <motion.div
           key={a.title}
+          variants={cardVariants}
           className="group relative flex items-start gap-5 p-6 rounded-2xl bg-white dark:bg-white/[0.02] border border-gray-100 dark:border-white/5 hover:border-brand-500/20 transition-all duration-300 gradient-card shadow-sm dark:shadow-none"
         >
           <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 flex items-center justify-center overflow-hidden">
@@ -60,8 +87,8 @@ export function AchievementList() {
               {a.location}
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

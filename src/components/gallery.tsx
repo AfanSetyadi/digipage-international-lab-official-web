@@ -2,7 +2,11 @@
 
 import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { GALLERY_IMAGES } from "@/lib/constants";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const VIEWPORT = { once: true, margin: "-80px" } as const;
 
 function Lightbox({
   index,
@@ -105,41 +109,57 @@ export function Gallery() {
 
   return (
     <>
-      <div className="mt-16">
+      <motion.div
+        className="mt-16"
+        initial="hidden"
+        whileInView="visible"
+        viewport={VIEWPORT}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.05 } },
+        }}
+      >
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3">
           {GALLERY_IMAGES.map((img, idx) => (
-            <button
+            <motion.div
               key={img.src}
-              type="button"
-              className="group relative aspect-square rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 hover:border-brand-500/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 dark:focus:ring-offset-[#0d1325]"
-              onClick={() => setLightboxIndex(idx)}
+              variants={{
+                hidden: { opacity: 0, scale: 0.85 },
+                visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: EASE } },
+              }}
             >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, 16vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                <svg
-                  className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                  />
-                </svg>
-              </div>
-            </button>
+              <button
+                type="button"
+                className="group relative aspect-square rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 hover:border-brand-500/40 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:ring-offset-2 dark:focus:ring-offset-[#0d1325] w-full"
+                onClick={() => setLightboxIndex(idx)}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, 16vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                  <svg
+                    className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                    />
+                  </svg>
+                </div>
+              </button>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {lightboxIndex !== null && (
         <Lightbox
