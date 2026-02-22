@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .dark .gradient-hero {
+    background: radial-gradient(
+        ellipse 80% 60% at 50% -20%,
+        rgba(51, 120, 255, 0.15),
+        transparent
+      ),
+      linear-gradient(180deg, #0a0f1e 0%, #101829 100%);
+  }
+
+  .gradient-hero {
+    background: radial-gradient(
+        ellipse 80% 60% at 50% -20%,
+        rgba(51, 120, 255, 0.08),
+        transparent
+      ),
+      linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  }
+}
+
+@layer components {
+  .gradient-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .dark .glow {
+    box-shadow: 0 0 60px rgba(51, 120, 255, 0.08);
+  }
+
+  .glow {
+    box-shadow: 0 0 60px rgba(51, 120, 255, 0.06);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
